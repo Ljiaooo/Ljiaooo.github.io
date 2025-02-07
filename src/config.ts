@@ -63,9 +63,9 @@ export const profileConfig: ProfileConfig = {
       url: 'https://qm.qq.com/q/ygDBBC238k',
     },
     {
-      name: 'WeChat',
-      icon: 'icon-park-outline:wechat',
-      url: 'https://www.wechat.com',
+      name: 'Email',
+      icon: 'icon-park-outline:email-down',
+      url: 'mailto:ljiaooooo@outlook.com',
     },
     {
       name: 'GitHub',
