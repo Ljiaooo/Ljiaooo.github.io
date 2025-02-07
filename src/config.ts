@@ -60,12 +60,12 @@ export const profileConfig: ProfileConfig = {
       icon: 'icon-park-outline:tencent-qq',       // Visit https://icones.js.org/ for icon codes
                                         // You will need to install the corresponding icon set if it's not already included
                                         // `pnpm add @iconify-json/<icon-set-name>`
-      url: 'http://wpa.qq.com/msgrd?v=3&uin=861070827&site=qq&menu=yes',
+      url: 'https://qm.qq.com/q/ygDBBC238k',
     },
     {
       name: 'WeChat',
       icon: 'icon-park-outline:wechat',
-      url: 'www.wechat.com',
+      url: 'https://www.wechat.com',
     },
     {
       name: 'GitHub',
