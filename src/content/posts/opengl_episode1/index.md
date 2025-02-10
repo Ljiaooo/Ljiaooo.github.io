@@ -2,7 +2,7 @@
 title: 搭建Windows & Visual Studio上的OpenGL环境
 published: 2025-02-10
 description: '根据Youtube上Cherno博主的教程搭建Windows & Visual Studio上OpenGL运行环境'
-image: '/:post_cover_images/opengl_label.png'
+image: ':/post_cover_images/opengl_label.png'
 tags: [OpenGL, Cherno]
 category: 'OpenGL_Cherno'
 draft: false 
@@ -25,7 +25,7 @@ OpenGL依赖窗口系统以及OpenGL上下文(context)，而它们都与操作�
 - [GLFW](https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.bin.WIN32.zip)，我们可以直接下载32位的二进制版本，注意这里的32位指的是编译出来的程序而非系统的比特数。
 - [GLEW](https://sourceforge.net/projects/glew/files/latest/download)，同样，我们下载GLEW的预编译版本即可。
 ## 静态库 OR 动态库
-GLFW与GLEW均提供了静态和动态库两种预编译库形式，这里我们并没有动态加载库的需求，直接使用静态库即可，因此对于两个三方库我们仅需要其中的**include**文件夹和**lib**文件即可。以下是整理之后的Visual Studio工程及两个三方库的目录结构。
+GLFW与GLEW均提供了静态和动态库两种预编译库形式，这里我们并没有动态加载库的需求，直接使用静态库即可，因此对于两个三方库我们仅需要其中的**include**文件夹和**lib**文件。以下是整理之后的Visual Studio工程及两个三方库的目录结构。
 ```
 ./
 ├── Dependencies/
