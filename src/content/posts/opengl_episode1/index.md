@@ -1,8 +1,8 @@
 ---
-title: 搭建Windows & Visual Studio上的OpenGL环境
+title: 搭建Windows & Visual Studio的OpenGL环境
 published: 2025-02-10
 description: '根据Youtube上Cherno博主的教程搭建Windows & Visual Studio上OpenGL运行环境'
-image: ':/post_cover_images/opengl_label.png'
+image: '/post_cover_images/opengl_label.png'
 tags: [OpenGL, Cherno]
 category: 'OpenGL_Cherno'
 draft: false 
