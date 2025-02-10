@@ -43,7 +43,7 @@ GLFW与GLEW均提供了静态和动态库两种预编译库形式，这里我们
 └── ProjectName.sln
 ```
 ### 添加三方库到工程中
-1. 现在我们已经下载好了需要的三方库，但是还不能直接在Visual Studio的工程中使用。为了让Visual Studio能够查到到我们的头文件，我们首先需要将两个库的头文件目录添加到工程中。
+1. 现在我们已经下载好了需要的三方库，但是还不能直接在Visual Studio的工程中使用。为了让Visual Studio能够查找到我们的头文件，我们首先需要将两个库的头文件目录添加到工程中。
     ```
     工程属性-> C/C++ -> 常规 -> 附加包含目录
     添加$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include，与其他项用";"隔开
