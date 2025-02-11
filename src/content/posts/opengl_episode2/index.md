@@ -1,0 +1,89 @@
+---
+title: 2、实现一个简单的OpenGL Demo
+published: 2025-02-11
+description: '在上一期的基础上添加简单的OpenGL绘制代码，实现三角形绘制'
+image: '/post_cover_images/opengl_label.png'
+tags: [OpenGL, Windows, C++, Cherno]
+category: 'OpenGL'
+draft: true 
+lang: ''
+---
+
+## 开始之前
+>Cherno的OpenGL视频教程: [YouTube](https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) / [bilibili(中译)](https://www.bilibili.com/video/BV1Ni4y1o7Au/?spm_id_from=333.1387.homepage.video_card.click)</br>
+>OpenGL在线接口文档: [docs.gl](https://docs.gl/)</br>
+>OpenGL在线教程网址: [中文](https://learnopengl-cn.github.io/) / [英文](https://learnopengl.com/)
+
+在[上一期](https://ljiaooo.github.io/posts/opengl_episode1/)中我们在Windows和Visual Studio搭建了OpenGL的开发运行环境并进行了环境测试，这一期我们将在之前的测试代码基础上添加简单的绘制代码，并了解OpenGL绘制大概流程。
+
+## OpenGL绘制Pipeline
+<img src=https://learnopengl-cn.github.io/img/01/04/pipeline.png align=center></img></br>
+
+如上图所示，想要利用OpenGL在屏幕上绘制图形，
+1. 首先我们需要给GPU提供需要绘制的数据(Vertex Data)，这些数据可以包含绘制的顶点坐标，颜色，法向量等等，虽然名为"Vertex(顶点)"，可以包含的数据远远不止顶点坐标。下面我们在上一期的代码中添加Vertex Data定义：
+    ```cpp
+    ...
+    if (glewInit() != GLEW_OK)
+        std::cout << "Fail to init glew!" << std::endl;
+
+    /* 定义绘制数据，这里只定义了三角形的三个顶点坐标 */
+    float positions[6] = {
+        -0.5f, -0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f
+    }
+
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(window))
+    ...
+
+    ```
+
+2. 定义完数据后，我们需要将数据传递到GPU，这通常需要：
+    - 调用**glGenBuffers**来生成GPU缓冲区对象，但是并不会分配显存
+    - 调用**glBindBuffer**将缓冲区对象绑定到特定的缓冲区目标，之后作用于缓冲区目标的操作都会作用域该缓冲区对象（OpenGL状态机机制）
+    - 调用**glBufferData**将内存中的数据传递到GPU显存</br>
+    :::tip
+    [docs.gl](https://docs.gl/)是一个非常好的OpenGL接口说明网站，包括了接口说明，参数说明以及用法案例等，使用OpenGL接口前查阅一下或许会避免很多意想不到的问题。
+    :::
+    ```cpp
+    ...
+    if (glewInit() != GLEW_OK)
+        std::cout << "Fail to init glew!" << std::endl;
+
+    /* 定义绘制数据，这里只定义了三角形的三个顶点坐标 */
+    float positions[6] = {
+        -0.5f, -0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f
+    }
+
+    /* 将数据传递到GPU */
+    unsigned int buffer;                    // 用于存储申请的缓冲区对象的标识
+    glGenBuffers(1, &buffer);               // 申请1个缓冲区对象，并将标识存储于buffer变量
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);  // 将缓冲区对象buffer绑定到GL_ARRAY_BUFFER缓冲区目标
+
+    /* 将缓冲区数据拷贝到GPU显存，注意这里并没有调用buffer变量，因为经过上一步绑定后，所有作用于GL_ARRAY_BUFFER的操作将作用于buffer变量。 */
+    glBufferData(GL_ARRAY_BUFFER, 6* sizeof(float), positions, GL_STATIC_DRAW); 
+
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(window))
+    ...
+    ```
+
+3. 我们在内存定义了绘制数据，并且将这些数据传递到了GPU。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
