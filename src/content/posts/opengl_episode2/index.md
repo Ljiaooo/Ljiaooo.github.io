@@ -64,14 +64,27 @@ lang: ''
     glBindBuffer(GL_ARRAY_BUFFER, buffer);  // 将缓冲区对象buffer绑定到GL_ARRAY_BUFFER缓冲区目标
 
     /* 将缓冲区数据拷贝到GPU显存，注意这里并没有调用buffer变量，因为经过上一步绑定后，所有作用于GL_ARRAY_BUFFER的操作将作用于buffer变量。 */
-    glBufferData(GL_ARRAY_BUFFER, 6* sizeof(float), positions, GL_STATIC_DRAW); 
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW); 
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     ...
     ```
 
-3. 我们在内存定义了绘制数据，并且将这些数据传递到了GPU。
+3. 我们在内存定义了绘制数据，并且将这些数据传递到了GPU。然而GPU只是获取到了一堆数据，我们还需要告诉GPU如何组织这些数据，例如上述**positions**数组，对于GPU而言只是拿到了6 * sizeof(float)个字节的数据而并不知道这是三角形三个顶点的二维坐标。在OpenGL中，通过如下方式告诉GPU数据的组织方式：
+    ```cpp
+    ...
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW); 
+
+    /* 在上述代码基础上继续添加 */
+    glVertexAttribPointer(0, 2, GL_FLOAT, false, 2 * sizeof(float), 0);  // 告诉GPU数据组织方式，详细用法参照docs.gl
+    ```
+
+4. 到目前为止，我们向GPU传输了数据同时通知了GPU数据的组织方式，下一步就需要告诉GPU如何进行绘制。作为开发者，我们通知GPU绘制方式的方法就是编写着色器（shader），着色器的本质就是运行在GPU的程序，类似于CPU程序，着色器也需要经过编译，链接等过程。最常用的两个着色器分别是顶点着色器（vertex shader）和片段着色器（fragment shader），如[上图](#opengl绘制pipeline)所示，vertex shader负责坐标变换，传递数据等；而fragment shader用于计算每一个像素的颜色，这包括考虑纹理，材质，光照等等因素。</br>
+顶点着色器为每一个顶点（例子中为三角形的3个顶点）执行一次，而片段着色器则需要为每一个像素（例子中为三角形内的每一个像素）执行一次，因此片段着色器的执行次数可以非常高，我们应该避免在片段着色器中执行过多操作。
+
+
+
 
 
 
