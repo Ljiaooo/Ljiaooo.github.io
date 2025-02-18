@@ -308,6 +308,8 @@ int main(void)
 ![](/src/content/posts/opengl_episode2/result.png)
 </div>
 
+::github{repo="ljiaooo/LearnOpenGL"}
+[Commit Link](https://github.com/Ljiaooo/LearnOpenGL/tree/400f6e46700e9fa24864b46b1211642e12b39ef2)
 
 
 
