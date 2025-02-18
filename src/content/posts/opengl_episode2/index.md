@@ -305,7 +305,7 @@ int main(void)
 - 如果成功运行上述代码，我们将得到一个红色三角形。
 <div align=center> 
 
-![](/src/content/posts/opengl_episode2/result.png)
+![](result.png)
 </div>
 
 ::github{repo="ljiaooo/LearnOpenGL"}
